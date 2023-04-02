@@ -1,4 +1,3 @@
-
 INSERT INTO genres
 VALUES 
 	(1, 'Блюз'),
@@ -125,4 +124,16 @@ VALUES
 	(15, 5),
 	(15, 8);
 
+INSERT INTO tracks -- для задания с продвинутой выборкой данных (пункт 8)
+VALUES
+(16, 10, 'Intro', 74);
 
+INSERT INTO albums -- для задания с продвинутой выборкой данных (пункт 7)
+VALUES
+(11, 'The big stars', 1968);
+
+
+INSERT INTO albumauthor -- для задания с продвинутой выборкой данных (пункт 7)
+VALUES
+	(11, 1),
+	(11, 3);

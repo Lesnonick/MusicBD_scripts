@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS TrackCollection(
 		CONSTRAINT pk_tc PRIMARY KEY (track_id, collection_id)
 );
 
-ALTER TABLE tracks ALTER COLUMN duration TYPE int USING duration::INTEGER;
+ALTER TABLE tracks ALTER COLUMN duration TYPE int USING EXTRACT(epoch FROM duration);
 
 ALTER TABLE collections RENAME COLUMN name TO collection_name;
 

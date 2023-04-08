@@ -20,6 +20,7 @@ VALUES
 INSERT INTO genreauthor 
 VALUES
 	(1, 3),
+	(2, 3),
 	(2, 1),
 	(2, 2),
 	(3, 4),
@@ -39,7 +40,8 @@ VALUES
 	(7, 'A Night at the Opera', 1975),
 	(8, 'Arrival', 1976),
 	(9, 'Voulez-Vous', 1979),
-	(10, 'Сделай Погромче!', 1998);
+	(10, 'Сделай Погромче!', 1998),
+    (11, 'The big stars', 1968);;
 
 INSERT INTO albumauthor
 VALUES
@@ -52,7 +54,9 @@ VALUES
 	(7, 6),
 	(8, 7),
 	(9, 7),
-	(10, 8);
+	(10, 8),
+	(11, 1),
+	(11, 3);
 	
 INSERT INTO tracks 
 VALUES
@@ -70,7 +74,8 @@ VALUES
 	(12, 7, 'Love of My Life', 219),
 	(13, 8, 'When I Kissed the Teacher', 180),
 	(14, 9, 'Angeleyes', 240),
-	(15, 10, 'Крошка моя', 250);
+	(15, 10, 'Крошка моя', 250),
+	(16, 10, 'Intro', 74);;
 
 INSERT INTO collections
 VALUES
@@ -124,16 +129,3 @@ VALUES
 	(15, 5),
 	(15, 8);
 
-INSERT INTO tracks -- для задания с продвинутой выборкой данных (пункт 8)
-VALUES
-(16, 10, 'Intro', 74);
-
-INSERT INTO albums -- для задания с продвинутой выборкой данных (пункт 7)
-VALUES
-(11, 'The big stars', 1968);
-
-
-INSERT INTO albumauthor -- для задания с продвинутой выборкой данных (пункт 7)
-VALUES
-	(11, 1),
-	(11, 3);

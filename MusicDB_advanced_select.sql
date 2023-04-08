@@ -28,11 +28,15 @@ LEFT JOIN albumauthor aa ON a.id = aa.album_id
 LEFT JOIN authors a2 ON aa.author_id = a2.id 
 WHERE pseudonym = 'Кино';
 
-SELECT title, COUNT(*) c INTO tR_num FROM albums a -- Создание вспомогательной таблицы (ОСОЗНАЮ, ЧТО МОЖНО СДЕЛАТЬ ВЛОЖЕННЫМИ SELECT, НО РЕШИЛ СДЕЛАТЬ КОМПАКТНЕЕ + ПОПРОБОВАТЬ ЧТО-ТО ДРУГОЕ)
+SELECT title FROM albums a -- 9. Названия альбомов, содержащих наименьшее количество треков (Но содержит хоть 1)
 LEFT JOIN tracks t ON a.id = t.album_id 
-GROUP BY title;
-SELECT title from tR_num -- 9. Названия альбомов, содержащих наименьшее количество треков (Но содержит хоть 1)
-WHERE c = (SELECT MIN(c) FROM tR_num);
+GROUP BY title, t.album_id
+HAVING COUNT(*) = ( 
+    SELECT COUNT(*) FROM tracks 
+    GROUP BY id 
+    ORDER BY 1 
+    LIMIT 1 
+);
 
 SELECT pseudonym FROM authors a -- 8. Исполнитель или исполнители, написавшие самый короткий по продолжительности трек
 LEFT JOIN albumauthor aa ON a.id = aa.author_id  
@@ -40,18 +44,17 @@ LEFT JOIN albums a2 ON aa.album_id = a2.id
 LEFT JOIN tracks t ON a2.id = t.album_id 
 WHERE duration = (SELECT MIN(duration) FROM tracks);
 
-
 SELECT track_name  FROM tracks t -- 7. Наименования треков, которые не входят в сборники.
 LEFT JOIN trackcollection tc  ON t.id = tc.track_id 
 LEFT JOIN collections c ON tc.collection_id  = c.id
 WHERE collection_name is NULL;
 
-SELECT title FROM albums a -- 6.Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
+SELECT DISTINCT title  FROM albums a -- 6.Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
 FULL JOIN albumauthor aa ON a.id = aa.album_id 
 FULL JOIN authors a2 ON aa.author_id = a2.id 
 FULL JOIN genreauthor ga ON a2.id = ga.author_id 
-GROUP BY title
-HAVING COUNT(*) > 1;
+GROUP BY ga.author_id, title  
+HAVING COUNT(ga.genre_id) > 1;
 
 
 
